@@ -25,6 +25,7 @@
 		3CF9C70027F8671300A81AE8 /* GameSceneAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9C6FF27F8671300A81AE8 /* GameSceneAI.swift */; };
 		3CF9C70427F869D700A81AE8 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70327F869D700A81AE8 /* Starfield.sks */; };
 		3CF9C70627F87DF000A81AE8 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70527F87DF000A81AE8 /* logo.jpeg */; };
+		A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB96E27F88851005C74E2 /* leaderboard.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		3CF9C6FF27F8671300A81AE8 /* GameSceneAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneAI.swift; sourceTree = "<group>"; };
 		3CF9C70327F869D700A81AE8 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		3CF9C70527F87DF000A81AE8 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpeg; sourceTree = "<group>"; };
+		A8AEB96E27F88851005C74E2 /* leaderboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = leaderboard.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,17 @@
 				3CF9C70527F87DF000A81AE8 /* logo.jpeg */,
 				3CF9C6E727F863A300A81AE8 /* LaunchScreen.storyboard */,
 				3CF9C70327F869D700A81AE8 /* Starfield.sks */,
+				A8AEB96D27F887A8005C74E2 /* Resources */,
 			);
 			path = Mattble;
+			sourceTree = "<group>";
+		};
+		A8AEB96D27F887A8005C74E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A8AEB96E27F88851005C74E2 /* leaderboard.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */,
 				3CF9C6E427F863A200A81AE8 /* Main.storyboard in Resources */,
 				3CF9C6DB27F863A200A81AE8 /* GameScene1.sks in Resources */,
 				3CF9C6F027F8657D00A81AE8 /* MainMenu.sks in Resources */,
