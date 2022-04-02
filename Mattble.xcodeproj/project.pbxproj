@@ -32,7 +32,7 @@
 		A8AEB98127F8B6FC005C74E2 /* pretzel123@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */; };
 		A8AEB98227F8B6FC005C74E2 /* cheat@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */; };
 		A8AEB98527F8B721005C74E2 /* tomathy@2x.heic in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */; };
-		A8AEB98627F8B721005C74E2 /* subteamLeaderAbby@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */; };
+		A8AEB98627F8B721005C74E2 /* abi@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98427F8B720005C74E2 /* abi@2x.jpeg */; };
 		A8AEB98827F8BDEA005C74E2 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB98727F8BDEA005C74E2 /* CircleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +63,7 @@
 		A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pretzel123@2x.jpeg"; sourceTree = "<group>"; };
 		A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cheat@2x.jpeg"; sourceTree = "<group>"; };
 		A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tomathy@2x.heic"; sourceTree = "<group>"; };
-		A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subteamLeaderAbby@2x.jpeg"; sourceTree = "<group>"; };
+		A8AEB98427F8B720005C74E2 /* abi@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "abi@2x.jpeg"; sourceTree = "<group>"; };
 		A8AEB98727F8BDEA005C74E2 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +126,7 @@
 			children = (
 				A8AEB96E27F88851005C74E2 /* leaderboard.json */,
 				A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */,
-				A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */,
+				A8AEB98427F8B720005C74E2 /* abi@2x.jpeg */,
 				A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */,
 				A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */,
 			);
@@ -202,7 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8AEB98627F8B721005C74E2 /* subteamLeaderAbby@2x.jpeg in Resources */,
+				A8AEB98627F8B721005C74E2 /* abi@2x.jpeg in Resources */,
 				A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */,
 				3CF9C6E427F863A200A81AE8 /* Main.storyboard in Resources */,
 				A8AEB98127F8B6FC005C74E2 /* pretzel123@2x.jpeg in Resources */,

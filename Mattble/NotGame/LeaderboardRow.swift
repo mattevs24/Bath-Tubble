@@ -13,8 +13,28 @@ struct LeaderboardRow: View {
     
     var body: some View {
         HStack {
-            Text(winner.name)
+            
+            Text("9")
+                .font(.system(size: 25))
+                .frame(width: 30, height: 50)
+            
+            VStack(alignment: .leading) {
+                Text(winner.name)
+                    .font(.system(size: 17))
+                    .fontWeight(.semibold)
+                Text(winner.date)
+                    .font(.system(size: 11))
+                    .foregroundColor(Color.gray)
+                
+            }
             Spacer()
+            Text(String(winner.score))
+                .font(.system(size: 23))
+                .multilineTextAlignment(.trailing)
+                .frame(width: 90, alignment: .trailing)
+            winner.image
+                .resizable()
+                .frame(width: 50, height: 50)
         }
     }
 }
