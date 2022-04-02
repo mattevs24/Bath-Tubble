@@ -28,12 +28,14 @@ class GameScene1: SKScene {
     
     var player1cards: [Int]!
     var player2cards: [Int]!
+    var correctIcon: Int?
+    var player1Icons: [Int]?
+    var player2Icons: [Int]?
     
-    var gameStarted: Bool = false
+    var gameStarted: Bool = false //touch enabled for game
     
     var countdown: SKSpriteNode!
     var gameCont = MultiplayerGameSystem()
-    
 
     override func didMove(to view: SKView) {
         
@@ -57,9 +59,26 @@ class GameScene1: SKScene {
             guard let touch = touches.first else { return }
             let location = touch.location(in: self)
             let nodesArray = self.nodes(at: location)
-            var nodeNamesArray: [String] = []
-            for node in nodesArray {
-                nodeNamesArray.append(node.name!)
+            
+            
+            player1Icons = gameCont.cards[currentCard1]
+            player2Icons = gameCont.cards[currentCard2]
+            
+            correctIcon = uniqueMatch(A: player1Icons!, B: player2Icons!)
+            
+            if nodesArray.first?.name == "correct" {   //should be "correct" = String(correctIcon)
+                let index = nodesArray.first?.name == "correct"
+                let node = nodesArray[index!]
+                let receiver = node.parent
+                if receiver == cardFront1 {
+                    moveCard(giver: 2)
+                } else if receiver == cardFront1Other {
+                    moveCard(giver: 2)
+                } else if receiver == cardFront2 {
+                    moveCard(giver: 1)
+                } else {
+                    moveCard(giver: 1)
+                }
             }
             
         }
@@ -91,8 +110,8 @@ class GameScene1: SKScene {
     }
     
     func createPlayerNumbers() {
-        player1 = SKLabelNode(text: "\(player1cards.count)")
-        player2 = SKLabelNode(text: "\(player2cards.count)")
+        player1 = SKLabelNode(text: "\(player1cards?.count ?? 0)")
+        player2 = SKLabelNode(text: "\(player2cards?.count ?? 0)")
         
         player1.position = CGPoint(x: frame.width/5-10, y: 250)
         player1.fontSize = 36
@@ -205,6 +224,7 @@ class GameScene1: SKScene {
                 let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
                 icon = SKSpriteNode(imageNamed: "logo")
+                icon.name = "incorrect"
                 icon.position = CGPoint(x:addx, y:addy)
                 icon.size = CGSize(width: 40, height: 40)
                 cardFront1Other?.addChild(icon)
@@ -221,6 +241,7 @@ class GameScene1: SKScene {
                 let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
                 icon = SKSpriteNode(imageNamed: "logo")
                 icon.position = CGPoint(x:addx, y:addy)
+                icon.name = "incorrect"
                 icon.size = CGSize(width: 40, height: 40)
                 cardFront1?.addChild(icon)
             }
@@ -239,6 +260,7 @@ class GameScene1: SKScene {
                 let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
                 icon = SKSpriteNode(imageNamed: "logo")
+                icon.name = "incorrect"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40, height: 40)
                 cardFront2Other?.addChild(icon)
@@ -254,6 +276,7 @@ class GameScene1: SKScene {
                 let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
                 icon = SKSpriteNode(imageNamed: "logo")
+                icon.name = "incorrect"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40, height: 40)
                 cardFront2?.addChild(icon)
@@ -263,7 +286,7 @@ class GameScene1: SKScene {
     
     //MARK: - moveCard
     
-    func moveCard(giver:Int, indexGiver: Int, indexReceiver: Int) {
+    func moveCard(giver:Int) {
         //raise the receiver +10
         //add new card under giver @ -10
         //translate given card
