@@ -197,6 +197,7 @@ class GameScene1: SKScene {
         if other {
             var icon = SKSpriteNode(imageNamed: "logo")
             icon.position = CGPoint.zero
+            icon.name = "correct"
             icon.size = CGSize(width: 40, height: 40)
             cardFront1Other?.addChild(icon)
             
@@ -211,6 +212,7 @@ class GameScene1: SKScene {
         } else {
             var icon = SKSpriteNode(imageNamed: "logo")
             icon.position = CGPoint.zero
+            icon.name = "correct"
             icon.size = CGSize(width: 40, height: 40)
             cardFront1?.addChild(icon)
             
@@ -228,6 +230,7 @@ class GameScene1: SKScene {
     func player2Icons(index:Int, other: Bool) {
         if other {
             var icon = SKSpriteNode(imageNamed: "logo")
+            icon.name = "correct"
             icon.position = CGPoint.zero
             icon.size = CGSize(width: 40, height: 40)
             cardFront2Other?.addChild(icon)
@@ -243,6 +246,7 @@ class GameScene1: SKScene {
         } else {
             var icon = SKSpriteNode(imageNamed: "logo")
             icon.position = CGPoint.zero
+            icon.name = "correct"
             icon.size = CGSize(width: 40, height: 40)
             cardFront2?.addChild(icon)
             
