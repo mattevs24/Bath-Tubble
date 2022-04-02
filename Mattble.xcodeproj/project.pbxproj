@@ -56,7 +56,7 @@
 		3CF9C6FF27F8671300A81AE8 /* GameSceneAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneAI.swift; sourceTree = "<group>"; };
 		3CF9C70327F869D700A81AE8 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		3CF9C70527F87DF000A81AE8 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpeg; sourceTree = "<group>"; };
-		A8AEB96E27F88851005C74E2 /* leaderboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = leaderboard.json; sourceTree = "<group>"; };
+		A8AEB96E27F88851005C74E2 /* leaderboard.json */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = text.json; path = leaderboard.json; sourceTree = "<group>"; tabWidth = 4; };
 		A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		A8AEB97327F8A142005C74E2 /* Winner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
 		A8AEB97527F8A7E1005C74E2 /* WinnerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerData.swift; sourceTree = "<group>"; };

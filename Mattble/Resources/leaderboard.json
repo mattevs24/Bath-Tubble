@@ -5,7 +5,7 @@
     "score": 2834,
     "time": 120,
     "cards": 34,
-  "id": 1001
+    "id": 1001
   },
   {
     "name": "pretzel123",
@@ -13,7 +13,7 @@
     "score": 4000,
     "time": 100,
     "cards": 40,
-  "id": 1002
+    "id": 1002
   },
   {
     "name": "tomathy",
@@ -21,7 +21,7 @@
     "score": 6572,
     "time": 70,
     "cards": 46,
-  "id": 1003
+    "id": 1003
   },
   {
     "name": "cheat",
@@ -29,35 +29,6 @@
     "score": 27500,
     "time": 20,
     "cards": 55,
-  "id": 1004
+    "id": 1004
   }
-=======
-    {
-	"name": "subteamLeaderAbby",
-	"date": "26/03/02",
-	"score": 2834,
-	"time": 120,
-	"cards": 34
-    },
-    {
-	"name": "pretzel123",
-	"date": "05/01/20",
-	"score": 4000,
-	"time": 100,
-	"cards": 40
-    },
-    {
-	"name": "tomathy",
-	"date": "01/04/22",
-	"score": 6572,
-	"time": 70,
-	"cards": 46
-    },
-    {
-	"name": "cheat",
-	"date": "02/04/22",
-	"score": 27500,
-	"time": 20,
-	"cards": 55
-    }
 ]
