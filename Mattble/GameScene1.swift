@@ -14,14 +14,20 @@ class GameScene1: SKScene {
     var cardBack1: SKShapeNode!
     var cardBack2: SKShapeNode!
     
-    var cardFront1: SKShapeNode!
-    var cardFront2: SKShapeNode!
+    var cardFront1: SKShapeNode?
+    var cardFront2: SKShapeNode?
+    
+    var cardFront1Other: SKShapeNode?
+    var cardFront2Other: SKShapeNode?
     
     var player1: SKLabelNode!
     var player2: SKLabelNode!
     
-    var cards1: Int = 10
-    var cards2: Int = 14
+    var currentCard1: Int!
+    var currentCard2: Int!
+    
+    var player1cards: [Int]!
+    var player2cards: [Int]!
     
     var gameStarted: Bool = false
     
@@ -30,17 +36,18 @@ class GameScene1: SKScene {
     
 
     override func didMove(to view: SKView) {
-        var player1cards: [Int]
-        var player2cards: [Int]
         
         createCardBacks()
         createPlayerNumbers()
         
         //set up the deck to be sorted into the piles
-        gameCont.indexes.shuffled()
+        gameCont.indexes.shuffle()
         gameCont.indexes.remove(at: 1)
         player1cards = Array(gameCont.indexes.prefix(27))
         player2cards = Array(gameCont.indexes.suffix(27))
+        
+        currentCard1 = player1cards[0]
+        currentCard2 = player2cards[0]
         
         countdownToPlay()
     }
@@ -49,6 +56,12 @@ class GameScene1: SKScene {
         if gameStarted {
             guard let touch = touches.first else { return }
             let location = touch.location(in: self)
+            let nodesArray = self.nodes(at: location)
+            var nodeNamesArray: [String] = []
+            for node in nodesArray {
+                nodeNamesArray.append(node.name!)
+            }
+            
         }
     }
     
@@ -78,8 +91,8 @@ class GameScene1: SKScene {
     }
     
     func createPlayerNumbers() {
-        player1 = SKLabelNode(text: "\(cards1)")
-        player2 = SKLabelNode(text: "\(cards2)")
+        player1 = SKLabelNode(text: "\(player1cards.count)")
+        player2 = SKLabelNode(text: "\(player2cards.count)")
         
         player1.position = CGPoint(x: frame.width/5-10, y: 250)
         player1.fontSize = 36
@@ -97,6 +110,8 @@ class GameScene1: SKScene {
         addChild(player1)
         addChild(player2)
     }
+    
+    //MARK: - Countdown
     
     func countdownToPlay() {
         let countdown3Texture = SKTexture(imageNamed: "logo")
@@ -116,84 +131,228 @@ class GameScene1: SKScene {
         let transition = SKAction.animate(with: [countdown3Texture,countdown2Texture,countdown1Texture,countdownGoTexture], timePerFrame: 1)
         let activatePlaying = SKAction.run { [unowned self] in
             self.gameStarted.toggle()
-            createCard()
+            createPlayer1Card()
+            cardFront1?.zPosition = 0
+            createPlayer2Card()
+            cardFront2?.zPosition = 0
             cardBack1.removeFromParent()
             cardBack2.removeFromParent()
-            player1Icons(index: 0)
-            player2Icons(index: 0)
+            player1Icons(index: 0, other: false)
+            player2Icons(index: 0, other: false)
         }
         let transitionSeq = SKAction.sequence([transition, remove, activatePlaying])
         
         countdown.run(transitionSeq)
     }
     
-    func createCard() {
+    //MARK: - playerCards creation
+    
+    func createPlayer1Card() {
         cardFront1 = SKShapeNode(circleOfRadius: 120)
+        cardFront1?.name = "player1Card"
+        cardFront1?.fillColor = .green
+        cardFront1?.zPosition = -10
+        
+        cardFront1?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        
+        addChild(cardFront1!)
+    }
+    
+    func createPlayer2Card() {
         cardFront2 = SKShapeNode(circleOfRadius: 120)
-        cardFront1.name = "player1Icon"
-        cardFront2.name = "player2Icon"
+        cardFront2?.name = "player2Card"
+        cardFront2?.fillColor = .green
+        cardFront2?.zPosition = -10
         
-        cardFront1.fillColor = .green
-        cardFront2.fillColor = .green
+        cardFront2?.position = CGPoint(x: frame.width/2, y: frame.height/4)
         
-        cardFront1.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
-        cardFront2.position = CGPoint(x: frame.width/2, y: frame.height/4)
-        
-        addChild(cardFront1)
-        addChild(cardFront2)
+        addChild(cardFront2!)
     }
     
-    func player1Icons(index:Int) {
-        var icon = SKSpriteNode(imageNamed: "logo")
-        icon.name = "player1Icon"
-        icon.position = CGPoint.zero
-        icon.size = CGSize(width: 40, height: 40)
-        cardFront1.addChild(icon)
+    func createPlayer1Other() {
+        cardFront1Other = SKShapeNode(circleOfRadius: 120)
+        cardFront1Other?.name = "player1Card"
+        cardFront1Other?.fillColor = .green
+        cardFront1Other?.zPosition = -10
         
-        for i in 0...6 {
-            let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
-            let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
-            icon = SKSpriteNode(imageNamed: "logo")
-            icon.position = CGPoint(x:addx, y:addy)
-            icon.name = "player1Icon"
+        cardFront1Other?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        
+        addChild(cardFront1Other!)
+    }
+    
+    func createPlayer2Other() {
+        cardFront2Other = SKShapeNode(circleOfRadius: 120)
+        cardFront2Other?.name = "player2Card"
+        cardFront2Other?.fillColor = .green
+        cardFront2Other?.zPosition = -10
+        
+        cardFront2Other?.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        
+        addChild(cardFront2Other!)
+    }
+    
+    //MARK: - PlayerIcons
+    
+    func player1Icons(index:Int, other: Bool) {
+        if other {
+            var icon = SKSpriteNode(imageNamed: "logo")
+            icon.position = CGPoint.zero
+            icon.name = "correct"
             icon.size = CGSize(width: 40, height: 40)
-            cardFront1.addChild(icon)
+            cardFront1Other?.addChild(icon)
+            
+            for i in 0...6 {
+                let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+                let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+                icon = SKSpriteNode(imageNamed: "logo")
+                icon.position = CGPoint(x:addx, y:addy)
+                icon.size = CGSize(width: 40, height: 40)
+                cardFront1Other?.addChild(icon)
+            }
+        } else {
+            var icon = SKSpriteNode(imageNamed: "logo")
+            icon.position = CGPoint.zero
+            icon.name = "correct"
+            icon.size = CGSize(width: 40, height: 40)
+            cardFront1?.addChild(icon)
+            
+            for i in 0...6 {
+                let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+                let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+                icon = SKSpriteNode(imageNamed: "logo")
+                icon.position = CGPoint(x:addx, y:addy)
+                icon.size = CGSize(width: 40, height: 40)
+                cardFront1?.addChild(icon)
+            }
         }
     }
     
-    func player2Icons(index:Int) {
-        var icon = SKSpriteNode(imageNamed: "logo")
-        icon.name = "player2Icon"
-        icon.position = CGPoint.zero
-        icon.size = CGSize(width: 40, height: 40)
-        cardFront2.addChild(icon)
-        
-        for i in 0...6 {
-            let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
-            let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
-            icon = SKSpriteNode(imageNamed: "logo")
-            icon.position = CGPoint(x:addx, y: addy)
-            icon.name = "player2Icon"
+    func player2Icons(index:Int, other: Bool) {
+        if other {
+            var icon = SKSpriteNode(imageNamed: "logo")
+            icon.name = "correct"
+            icon.position = CGPoint.zero
             icon.size = CGSize(width: 40, height: 40)
-            cardFront2.addChild(icon)
+            cardFront2Other?.addChild(icon)
+            
+            for i in 0...6 {
+                let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+                let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+                icon = SKSpriteNode(imageNamed: "logo")
+                icon.position = CGPoint(x:addx, y: addy)
+                icon.size = CGSize(width: 40, height: 40)
+                cardFront2Other?.addChild(icon)
+            }
+        } else {
+            var icon = SKSpriteNode(imageNamed: "logo")
+            icon.position = CGPoint.zero
+            icon.name = "correct"
+            icon.size = CGSize(width: 40, height: 40)
+            cardFront2?.addChild(icon)
+            
+            for i in 0...6 {
+                let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+                let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+                icon = SKSpriteNode(imageNamed: "logo")
+                icon.position = CGPoint(x:addx, y: addy)
+                icon.size = CGSize(width: 40, height: 40)
+                cardFront2?.addChild(icon)
+            }
         }
     }
     
-    func moveCard(giver:Int, receiver: Int, indexGiver: Int, indexReceiver: Int) {
+    //MARK: - moveCard
+    
+    func moveCard(giver:Int, indexGiver: Int, indexReceiver: Int) {
         //raise the receiver +10
-        let giverID = "player\(giver)Icon"
-        let receiverID = "player\(receiver)Icon"
-        
-        childNode(withName: receiverID)?.zPosition += 10
-        
         //add new card under giver @ -10
-        
         //translate given card
-        
         //remove card after the translation
-        
         //move new card up 10
+        //move new card up 10
+        //move old other card down 10
         
-        //move receiver -10
+        if giver == 1 {
+            if cardFront1 == nil {
+                if cardFront2 == nil {
+                    cardFront2Other?.zPosition += 10
+                } else {
+                    cardFront2?.zPosition += 10
+                }
+                createPlayer1Card()
+                player1Icons(index: 0, other: false)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
+                cardFront1Other?.run(action)
+                cardFront1Other = nil //need to nil
+                cardFront1?.zPosition += 10
+                if cardFront2 == nil {
+                    cardFront2Other?.zPosition -= 10
+                } else {
+                    cardFront2?.zPosition -= 10
+                }
+            } else {
+                if cardFront2 == nil {
+                    cardFront2Other?.zPosition += 10
+                } else {
+                    cardFront2?.zPosition += 10
+                }
+                createPlayer1Other()
+                player1Icons(index: 0, other: true)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
+                cardFront1?.run(action)
+                cardFront1 = nil
+                cardFront1Other?.zPosition += 10
+                if cardFront2 == nil {
+                    cardFront2Other?.zPosition -= 10
+                } else {
+                    cardFront2?.zPosition -= 10
+                }
+            }
+
+        } else if giver == 2 {
+            if cardFront2 == nil {
+                if cardFront1 == nil {
+                    cardFront1Other?.zPosition += 10
+                } else {
+                    cardFront1?.zPosition += 10
+                }
+                createPlayer2Card()
+                player2Icons(index: 0, other: false)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                cardFront2Other?.run(action)
+                cardFront2Other = nil
+                cardFront2?.zPosition += 10
+                if cardFront1 == nil {
+                    cardFront1Other?.zPosition -= 10
+                } else {
+                    cardFront1?.zPosition -= 10
+                }
+            } else {
+                if cardFront1 == nil {
+                    cardFront1Other?.zPosition += 10
+                } else {
+                    cardFront1?.zPosition += 10
+                }
+                createPlayer2Other()
+                player2Icons(index: 0, other: true)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                cardFront2?.run(action)
+                cardFront2 = nil
+                cardFront2Other?.zPosition += 10
+                if cardFront1 == nil {
+                    cardFront1Other?.zPosition -= 10
+                } else {
+                    cardFront1?.zPosition -= 10
+                }
+            }
+        }
+    }
+    
+    func uniqueMatch(A:[Int],B:[Int]) -> Int {
+        if Array(Set(A).intersection(Set(B))).count == 1{
+            return Array(Set(A).intersection(Set(B)))[0]
+        } else {
+            return 0
+        }
     }
 }
