@@ -34,6 +34,7 @@
 		A8AEB98527F8B721005C74E2 /* tomathy@2x.heic in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */; };
 		A8AEB98627F8B721005C74E2 /* abi@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98427F8B720005C74E2 /* abi@2x.jpeg */; };
 		A8AEB98827F8BDEA005C74E2 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB98727F8BDEA005C74E2 /* CircleView.swift */; };
+		A8AEB98A27F8E7AE005C74E2 /* LeaderboardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB98927F8E7AE005C74E2 /* LeaderboardList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tomathy@2x.heic"; sourceTree = "<group>"; };
 		A8AEB98427F8B720005C74E2 /* abi@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "abi@2x.jpeg"; sourceTree = "<group>"; };
 		A8AEB98727F8BDEA005C74E2 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		A8AEB98927F8E7AE005C74E2 /* LeaderboardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */,
+				A8AEB98927F8E7AE005C74E2 /* LeaderboardList.swift */,
 				A8AEB98727F8BDEA005C74E2 /* CircleView.swift */,
 				A8AEB97327F8A142005C74E2 /* Winner.swift */,
 				A8AEB97527F8A7E1005C74E2 /* WinnerData.swift */,
@@ -229,6 +232,7 @@
 			files = (
 				A8AEB98827F8BDEA005C74E2 /* CircleView.swift in Sources */,
 				3CF9C6DF27F863A200A81AE8 /* GameScene1.swift in Sources */,
+				A8AEB98A27F8E7AE005C74E2 /* LeaderboardList.swift in Sources */,
 				3CF9C6FE27F866E500A81AE8 /* SettingsMenu.swift in Sources */,
 				3CF9C6FC27F866B800A81AE8 /* MainMenu.swift in Sources */,
 				3CF9C6FA27F8669C00A81AE8 /* GameMenu.swift in Sources */,
