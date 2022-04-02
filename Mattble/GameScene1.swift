@@ -97,10 +97,14 @@ class GameScene1: SKScene {
         let countdown2Texture = SKTexture(imageNamed: "logo")
         let countdown1Texture = SKTexture(imageNamed: "logo")
         let countdownGoTexture = SKTexture(imageNamed: "logo")
+        let remove = SKAction.removeFromParent()
         
         let transition = SKAction.animate(with: [countdown3Texture,countdown2Texture,countdown1Texture,countdownGoTexture], timePerFrame: 1)
+        let activatePlaying = SKAction.run { [unowned self] in
+            self.gameStarted.toggle()
+        }
+        let transitionSeq = SKAction.sequence([transition, remove, activatePlaying])
         
-        countdown.run(transition)
+        countdown.run(transitionSeq)
     }
-    
 }
