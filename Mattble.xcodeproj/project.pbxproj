@@ -26,6 +26,14 @@
 		3CF9C70427F869D700A81AE8 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70327F869D700A81AE8 /* Starfield.sks */; };
 		3CF9C70627F87DF000A81AE8 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70527F87DF000A81AE8 /* logo.jpeg */; };
 		A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB96E27F88851005C74E2 /* leaderboard.json */; };
+		A8AEB97227F89F96005C74E2 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */; };
+		A8AEB97427F8A142005C74E2 /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB97327F8A142005C74E2 /* Winner.swift */; };
+		A8AEB97627F8A7E1005C74E2 /* WinnerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB97527F8A7E1005C74E2 /* WinnerData.swift */; };
+		A8AEB98127F8B6FC005C74E2 /* pretzel123@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */; };
+		A8AEB98227F8B6FC005C74E2 /* cheat@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */; };
+		A8AEB98527F8B721005C74E2 /* tomathy@2x.heic in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */; };
+		A8AEB98627F8B721005C74E2 /* subteamLeaderAbby@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */; };
+		A8AEB98827F8BDEA005C74E2 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB98727F8BDEA005C74E2 /* CircleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +57,14 @@
 		3CF9C70327F869D700A81AE8 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		3CF9C70527F87DF000A81AE8 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpeg; sourceTree = "<group>"; };
 		A8AEB96E27F88851005C74E2 /* leaderboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = leaderboard.json; sourceTree = "<group>"; };
+		A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
+		A8AEB97327F8A142005C74E2 /* Winner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
+		A8AEB97527F8A7E1005C74E2 /* WinnerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerData.swift; sourceTree = "<group>"; };
+		A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pretzel123@2x.jpeg"; sourceTree = "<group>"; };
+		A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cheat@2x.jpeg"; sourceTree = "<group>"; };
+		A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tomathy@2x.heic"; sourceTree = "<group>"; };
+		A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subteamLeaderAbby@2x.jpeg"; sourceTree = "<group>"; };
+		A8AEB98727F8BDEA005C74E2 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +115,7 @@
 				3CF9C70527F87DF000A81AE8 /* logo.jpeg */,
 				3CF9C6E727F863A300A81AE8 /* LaunchScreen.storyboard */,
 				3CF9C70327F869D700A81AE8 /* Starfield.sks */,
+				A8AEB97027F89EF9005C74E2 /* NotGame */,
 				A8AEB96D27F887A8005C74E2 /* Resources */,
 			);
 			path = Mattble;
@@ -108,8 +125,23 @@
 			isa = PBXGroup;
 			children = (
 				A8AEB96E27F88851005C74E2 /* leaderboard.json */,
+				A8AEB98327F8B720005C74E2 /* tomathy@2x.heic */,
+				A8AEB98427F8B720005C74E2 /* subteamLeaderAbby@2x.jpeg */,
+				A8AEB98027F8B6FC005C74E2 /* cheat@2x.jpeg */,
+				A8AEB97F27F8B6FB005C74E2 /* pretzel123@2x.jpeg */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A8AEB97027F89EF9005C74E2 /* NotGame */ = {
+			isa = PBXGroup;
+			children = (
+				A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */,
+				A8AEB98727F8BDEA005C74E2 /* CircleView.swift */,
+				A8AEB97327F8A142005C74E2 /* Winner.swift */,
+				A8AEB97527F8A7E1005C74E2 /* WinnerData.swift */,
+			);
+			path = NotGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,15 +202,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AEB98627F8B721005C74E2 /* subteamLeaderAbby@2x.jpeg in Resources */,
 				A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */,
 				3CF9C6E427F863A200A81AE8 /* Main.storyboard in Resources */,
+				A8AEB98127F8B6FC005C74E2 /* pretzel123@2x.jpeg in Resources */,
 				3CF9C6DB27F863A200A81AE8 /* GameScene1.sks in Resources */,
 				3CF9C6F027F8657D00A81AE8 /* MainMenu.sks in Resources */,
 				3CF9C6F427F8662900A81AE8 /* GameMenu.sks in Resources */,
 				3CF9C6E627F863A300A81AE8 /* Assets.xcassets in Resources */,
 				3CF9C6F627F8664000A81AE8 /* SettingsMenu.sks in Resources */,
+				A8AEB98527F8B721005C74E2 /* tomathy@2x.heic in Resources */,
 				3CF9C70627F87DF000A81AE8 /* logo.jpeg in Resources */,
 				3CF9C70427F869D700A81AE8 /* Starfield.sks in Resources */,
+				A8AEB98227F8B6FC005C74E2 /* cheat@2x.jpeg in Resources */,
 				3CF9C6F227F8659900A81AE8 /* GameSceneAI.sks in Resources */,
 				3CF9C6E927F863A300A81AE8 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -191,14 +227,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AEB98827F8BDEA005C74E2 /* CircleView.swift in Sources */,
 				3CF9C6DF27F863A200A81AE8 /* GameScene1.swift in Sources */,
 				3CF9C6FE27F866E500A81AE8 /* SettingsMenu.swift in Sources */,
 				3CF9C6FC27F866B800A81AE8 /* MainMenu.swift in Sources */,
 				3CF9C6FA27F8669C00A81AE8 /* GameMenu.swift in Sources */,
+				A8AEB97627F8A7E1005C74E2 /* WinnerData.swift in Sources */,
+				A8AEB97427F8A142005C74E2 /* Winner.swift in Sources */,
 				3CF9C6F827F8666600A81AE8 /* gameContStructures.swift in Sources */,
 				3CF9C6E127F863A200A81AE8 /* GameViewController.swift in Sources */,
 				3CF9C70027F8671300A81AE8 /* GameSceneAI.swift in Sources */,
 				3CF9C6D927F863A200A81AE8 /* AppDelegate.swift in Sources */,
+				A8AEB97227F89F96005C74E2 /* LeaderboardRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
