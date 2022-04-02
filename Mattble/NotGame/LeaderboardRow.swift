@@ -30,7 +30,7 @@ struct LeaderboardRow: View {
                 
             }
             Spacer()
-            Text(String(winner.score))
+            Text("\(winner.score)")
                 .font(.system(size: 23))
                 .multilineTextAlignment(.trailing)
                 .frame(width: 90, alignment: .trailing)
