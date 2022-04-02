@@ -22,7 +22,18 @@ class GameMenu: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //placeholder
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let nodesArray = self.nodes(at: location)
+        if nodesArray.first?.name == "multiplayer" {
+            let transition = SKTransition.push(with: .left, duration: 0.5)
+            let gameMenu = GameScene1(size: self.size)
+            self.view?.presentScene(gameMenu, transition: transition)
+        } else if nodesArray.first?.name == "singleplayer" {
+            let transition = SKTransition.push(with: .left, duration: 0.5)
+            let gameMenu = GameSceneAI(size: self.size)
+            self.view?.presentScene(gameMenu, transition: transition)
+        }
     }
     
     func createBackground() {
@@ -39,6 +50,9 @@ class GameMenu: SKScene {
         
         gamescene1button = SKSpriteNode(imageNamed: "")
         gamesceneAIbutton = SKSpriteNode(imageNamed: "")
+        
+        gamescene1button.name = "multiplayer"
+        gamesceneAIbutton.name = "singleplayer"
         
         gamescene1button.position = CGPoint(x: frame.width/2, y: frame.height/3*2)
         gamesceneAIbutton.position = CGPoint(x: frame.width/2, y: frame.height/3)
