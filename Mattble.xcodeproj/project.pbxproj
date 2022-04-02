@@ -23,6 +23,7 @@
 		3CF9C6FC27F866B800A81AE8 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9C6FB27F866B800A81AE8 /* MainMenu.swift */; };
 		3CF9C6FE27F866E500A81AE8 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9C6FD27F866E500A81AE8 /* SettingsMenu.swift */; };
 		3CF9C70027F8671300A81AE8 /* GameSceneAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9C6FF27F8671300A81AE8 /* GameSceneAI.swift */; };
+		3CF9C70427F869D700A81AE8 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70327F869D700A81AE8 /* Starfield.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		3CF9C6FB27F866B800A81AE8 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		3CF9C6FD27F866E500A81AE8 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		3CF9C6FF27F8671300A81AE8 /* GameSceneAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneAI.swift; sourceTree = "<group>"; };
+		3CF9C70327F869D700A81AE8 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				3CF9C6E227F863A200A81AE8 /* Main.storyboard */,
 				3CF9C6E527F863A300A81AE8 /* Assets.xcassets */,
 				3CF9C6E727F863A300A81AE8 /* LaunchScreen.storyboard */,
+				3CF9C70327F869D700A81AE8 /* Starfield.sks */,
 			);
 			path = Mattble;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				3CF9C6F427F8662900A81AE8 /* GameMenu.sks in Resources */,
 				3CF9C6E627F863A300A81AE8 /* Assets.xcassets in Resources */,
 				3CF9C6F627F8664000A81AE8 /* SettingsMenu.sks in Resources */,
+				3CF9C70427F869D700A81AE8 /* Starfield.sks in Resources */,
 				3CF9C6F227F8659900A81AE8 /* GameSceneAI.sks in Resources */,
 				3CF9C6E927F863A300A81AE8 /* LaunchScreen.storyboard in Resources */,
 			);
