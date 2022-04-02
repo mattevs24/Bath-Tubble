@@ -14,9 +14,6 @@ import UIKit
 //need to add textures thorughout! just left blacnk for now
 
 
-
-
-
 class MainMenu: SKScene {
     
     var background: SKEmitterNode!
@@ -31,7 +28,20 @@ class MainMenu: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //placeholder
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let nodesArray = self.nodes(at: location)
+        if nodesArray.first?.name == "newGameButton" {
+            let transition = SKTransition.push(with: .left, duration: 0.5)
+            let gameMenu = GameMenu(size: self.size)
+            self.view?.presentScene(gameMenu, transition: transition)
+        } else if nodesArray.first?.name == "settingsMenuButton" {
+            let transition = SKTransition.push(with: .left, duration: 0.5)
+            let gameMenu = SettingsMenu(size: self.size)
+            self.view?.presentScene(gameMenu, transition: transition)
+        }
+        
+        
     }
     
     func createBackground() {
@@ -57,6 +67,7 @@ class MainMenu: SKScene {
         newGameButton.position = CGPoint(x: frame.width/2, y: frame.height/2)
         newGameButton.size.width = frame.width/2
         newGameButton.size.height = frame.height/6
+        newGameButton.name = "newGameButton"
         addChild(newGameButton)
         
         
@@ -64,6 +75,7 @@ class MainMenu: SKScene {
         settingsMenuButton.position = CGPoint(x: frame.width/2, y: frame.height/3)
         settingsMenuButton.size.width = frame.width/2
         settingsMenuButton.size.height = frame.height/6
+        settingsMenuButton.name = "settingsMenuButton"
         addChild(settingsMenuButton)
     }
 }
