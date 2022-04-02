@@ -5,6 +5,8 @@
 //  Created by Matthew Evans on 02/04/2022.
 //
 
+//need to add sounds and white playing card texture for the cards
+
 import SpriteKit
 import GameplayKit
 import SwiftUI
@@ -20,9 +22,6 @@ class GameScene1: SKScene {
     var cardFront1Other: SKShapeNode?
     var cardFront2Other: SKShapeNode?
     
-    var player1: SKLabelNode!
-    var player2: SKLabelNode!
-    
     var currentCard1: Int!
     var currentCard2: Int!
     
@@ -31,6 +30,9 @@ class GameScene1: SKScene {
     var correctIcon: Int?
     var player1Icons: [Int]?
     var player2Icons: [Int]?
+    
+    var player1: SKLabelNode!
+    var player2: SKLabelNode!
     
     var gameStarted: Bool = false //touch enabled for game
     
@@ -78,7 +80,7 @@ class GameScene1: SKScene {
                 } else {
                     moveCard(giver: 1)
                 }
-            }            
+            }
         }
     }
     
@@ -284,6 +286,11 @@ class GameScene1: SKScene {
     
     //MARK: - moveCard
     
+    /*
+     need to add a transition to the game over menu when the player1cards.count == 0 and same for player2cards.count == 0 ie at the points marked with a break point below in moveCard()
+     
+     */
+    
     func moveCard(giver:Int) {
         //raise the receiver +10
         //add new card under giver @ -10
@@ -300,6 +307,13 @@ class GameScene1: SKScene {
                 } else {
                     cardFront2?.zPosition += 10
                 }
+                //the move card to the other array
+                let random = Int.random(in:1...player2cards.count-1)
+                player2cards.insert(currentCard1, at: random)
+                let index = player1cards.firstIndex(of: currentCard1)
+                player1cards.remove(at: index!)
+                currentCard1 = player1cards[0]              //
+                
                 createPlayer1Card()
                 player1Icons(index: 0, other: false)
                 let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
@@ -317,6 +331,13 @@ class GameScene1: SKScene {
                 } else {
                     cardFront2?.zPosition += 10
                 }
+                //the move card to the other array
+                let random = Int.random(in:1...player2cards.count-1)
+                player2cards.insert(currentCard1, at: random)
+                let index = player1cards.firstIndex(of: currentCard1)
+                player1cards.remove(at: index!)
+                currentCard1 = player1cards[0]
+                
                 createPlayer1Other()
                 player1Icons(index: 0, other: true)
                 let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
@@ -337,6 +358,13 @@ class GameScene1: SKScene {
                 } else {
                     cardFront1?.zPosition += 10
                 }
+                //the move card to the other array
+                let random = Int.random(in:1...player1cards.count-1)
+                player1cards.insert(currentCard2, at: random)
+                let index = player2cards.firstIndex(of: currentCard2)
+                player2cards.remove(at: index!)
+                currentCard2 = player2cards[0]
+                
                 createPlayer2Card()
                 player2Icons(index: 0, other: false)
                 let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
@@ -354,6 +382,13 @@ class GameScene1: SKScene {
                 } else {
                     cardFront1?.zPosition += 10
                 }
+                //the move card to the other array
+                let random = Int.random(in:1...player1cards.count-1)
+                player1cards.insert(currentCard2, at: random)
+                let index = player2cards.firstIndex(of: currentCard2)
+                player2cards.remove(at: index!)
+                currentCard2 = player2cards[0]
+                
                 createPlayer2Other()
                 player2Icons(index: 0, other: true)
                 let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
