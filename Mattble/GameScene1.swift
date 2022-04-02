@@ -67,8 +67,7 @@ class GameScene1: SKScene {
             correctIcon = uniqueMatch(A: player1Icons!, B: player2Icons!)
             
             if nodesArray.first?.name == "correct" {   //should be "correct" = String(correctIcon)
-                let index = nodesArray.first?.name == "correct"
-                let node = nodesArray[index!]
+                let node = nodesArray[0]
                 let receiver = node.parent
                 if receiver == cardFront1 {
                     moveCard(giver: 2)
@@ -79,8 +78,7 @@ class GameScene1: SKScene {
                 } else {
                     moveCard(giver: 1)
                 }
-            }
-            
+            }            
         }
     }
     
