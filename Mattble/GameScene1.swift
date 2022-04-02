@@ -14,6 +14,9 @@ class GameScene1: SKScene {
     var cardBack1: SKShapeNode!
     var cardBack2: SKShapeNode!
     
+    var cardFront1: SKShapeNode!
+    var cardFront2: SKShapeNode!
+    
     var player1: SKLabelNode!
     var player2: SKLabelNode!
     
@@ -23,11 +26,21 @@ class GameScene1: SKScene {
     var gameStarted: Bool = false
     
     var countdown: SKSpriteNode!
+    var gameCont = MultiplayerGameSystem()
     
 
     override func didMove(to view: SKView) {
+        var player1cards: [Int]
+        var player2cards: [Int]
+        
         createCardBacks()
         createPlayerNumbers()
+        
+        //set up the deck to be sorted into the piles
+        gameCont.indexes.shuffled()
+        gameCont.indexes.remove(at: 1)
+        player1cards = Array(gameCont.indexes.prefix(27))
+        player2cards = Array(gameCont.indexes.suffix(27))
         
         countdownToPlay()
     }
@@ -35,6 +48,7 @@ class GameScene1: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameStarted {
             guard let touch = touches.first else { return }
+            let location = touch.location(in: self)
         }
     }
     
@@ -102,9 +116,84 @@ class GameScene1: SKScene {
         let transition = SKAction.animate(with: [countdown3Texture,countdown2Texture,countdown1Texture,countdownGoTexture], timePerFrame: 1)
         let activatePlaying = SKAction.run { [unowned self] in
             self.gameStarted.toggle()
+            createCard()
+            cardBack1.removeFromParent()
+            cardBack2.removeFromParent()
+            player1Icons(index: 0)
+            player2Icons(index: 0)
         }
         let transitionSeq = SKAction.sequence([transition, remove, activatePlaying])
         
         countdown.run(transitionSeq)
+    }
+    
+    func createCard() {
+        cardFront1 = SKShapeNode(circleOfRadius: 120)
+        cardFront2 = SKShapeNode(circleOfRadius: 120)
+        cardFront1.name = "player1Icon"
+        cardFront2.name = "player2Icon"
+        
+        cardFront1.fillColor = .green
+        cardFront2.fillColor = .green
+        
+        cardFront1.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        cardFront2.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        
+        addChild(cardFront1)
+        addChild(cardFront2)
+    }
+    
+    func player1Icons(index:Int) {
+        var icon = SKSpriteNode(imageNamed: "logo")
+        icon.name = "player1Icon"
+        icon.position = CGPoint.zero
+        icon.size = CGSize(width: 40, height: 40)
+        cardFront1.addChild(icon)
+        
+        for i in 0...6 {
+            let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+            let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+            icon = SKSpriteNode(imageNamed: "logo")
+            icon.position = CGPoint(x:addx, y:addy)
+            icon.name = "player1Icon"
+            icon.size = CGSize(width: 40, height: 40)
+            cardFront1.addChild(icon)
+        }
+    }
+    
+    func player2Icons(index:Int) {
+        var icon = SKSpriteNode(imageNamed: "logo")
+        icon.name = "player2Icon"
+        icon.position = CGPoint.zero
+        icon.size = CGSize(width: 40, height: 40)
+        cardFront2.addChild(icon)
+        
+        for i in 0...6 {
+            let addx = 90*sin((2.0/7.0)*Double.pi*Double(i))
+            let addy = 90*cos((2.0/7.0)*Double.pi*Double(i))
+            icon = SKSpriteNode(imageNamed: "logo")
+            icon.position = CGPoint(x:addx, y: addy)
+            icon.name = "player2Icon"
+            icon.size = CGSize(width: 40, height: 40)
+            cardFront2.addChild(icon)
+        }
+    }
+    
+    func moveCard(giver:Int, receiver: Int, indexGiver: Int, indexReceiver: Int) {
+        //raise the receiver +10
+        let giverID = "player\(giver)Icon"
+        let receiverID = "player\(receiver)Icon"
+        
+        childNode(withName: receiverID)?.zPosition += 10
+        
+        //add new card under giver @ -10
+        
+        //translate given card
+        
+        //remove card after the translation
+        
+        //move new card up 10
+        
+        //move receiver -10
     }
 }
