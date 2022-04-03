@@ -28,7 +28,7 @@ class GameScene1: SKScene {
     
     var player1cards: [Int]!
     var player2cards: [Int]!
-    var correctIcon: Int?
+    var correctIcon: String!
     var player1Icons: [Int]?
     var player2Icons: [Int]?
     
@@ -61,22 +61,6 @@ class GameScene1: SKScene {
         currentCard1 = player1cards[0]
         currentCard2 = player2cards[0]
         
-        let urlString = Bundle.main.path(forResource: "music", ofType: "mp3")
-        do {
-            try AVAudioSession.sharedInstance().setMode(.default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            guard let urlString = urlString else {return}
-            
-            music = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
-            guard let music = music else { return }
-            
-            music.play()
-            
-        } catch {
-            print("etwas is schiefgelaufen")
-        }
-        
         countdownToPlay()
     }
     
@@ -94,7 +78,7 @@ class GameScene1: SKScene {
             
             correctIcon = uniqueMatch(A: player1Icons!, B: player2Icons!)
             
-            if nodesArray.first?.name == "correct" {   //should be "correct" = String(correctIcon)
+            if nodesArray.first?.name == correctIcon {
                 let node = nodesArray[0]
                 let receiver = node.parent
                 if receiver == cardFront1 {
@@ -248,12 +232,14 @@ class GameScene1: SKScene {
     
     func player1Icons(index:Int, other: Bool) {
         if other {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard1]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
             icon.position = CGPoint.zero
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront1Other?.addChild(icon)
@@ -261,23 +247,25 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y:addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront1Other?.addChild(icon)
             }
         } else {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard1]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             icon.position = CGPoint.zero
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront1?.addChild(icon)
@@ -285,12 +273,12 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
                 icon.position = CGPoint(x:addx, y:addy)
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront1?.addChild(icon)
@@ -300,8 +288,10 @@ class GameScene1: SKScene {
     
     func player2Icons(index:Int, other: Bool) {
         if other {
-            var icon = SKSpriteNode(imageNamed: "logo")
-            icon.name = "correct"
+            var shuffled = gameCont.cards[currentCard2]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
+            icon.name = "\(shuffled![0])"
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
@@ -313,23 +303,25 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront2Other?.addChild(icon)
             }
         } else {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard2]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             icon.position = CGPoint.zero
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront2?.addChild(icon)
@@ -340,8 +332,8 @@ class GameScene1: SKScene {
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon = SKSpriteNode(imageNamed: "logo")
-                icon.name = "incorrect"
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
@@ -506,11 +498,11 @@ class GameScene1: SKScene {
         }
     }
     
-    func uniqueMatch(A:[Int],B:[Int]) -> Int {
+    func uniqueMatch(A:[Int],B:[Int]) -> String {
         if Array(Set(A).intersection(Set(B))).count == 1{
-            return Array(Set(A).intersection(Set(B)))[0]
+            return String(Array(Set(A).intersection(Set(B)))[0])
         } else {
-            return 0
+            return "0"
         }
     }
 }
