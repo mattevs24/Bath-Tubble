@@ -29,6 +29,7 @@ class GameMenu: SKScene {
             let transition = SKTransition.push(with: .left, duration: 0.5)
             run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: true))
             let gameMenu = GameScene1(size: self.size)
+            gameMenu.view?.ignoresSiblingOrder = true
             gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         } else if nodesArray.first?.name == "singleplayer" {
