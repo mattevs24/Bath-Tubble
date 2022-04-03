@@ -131,13 +131,13 @@ class GameScene1: SKScene {
         player1.fontSize = 36
         player1.fontName = ""
         player1.zPosition = -100
-        player1.fontColor = .black
+        player1.fontColor = .white
         
         player2.position = CGPoint(x: frame.width*4/5+10, y: 667-250)
         player2.fontSize = 36
         player2.fontName = ""
         player2.zPosition = -100
-        player2.fontColor = .black
+        player2.fontColor = .white
         player2.zRotation = .pi
         
         addChild(player1)

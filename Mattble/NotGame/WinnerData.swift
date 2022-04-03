@@ -8,6 +8,7 @@
 import Foundation
 
 var winners: [Winner] = load("leaderboard.json")
+var logos: [Logo] = load("logoDescriptions.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
