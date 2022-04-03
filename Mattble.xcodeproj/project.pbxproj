@@ -27,6 +27,9 @@
 		3CF9C70627F87DF000A81AE8 /* logo.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70527F87DF000A81AE8 /* logo.jpeg */; };
 		3CF9C70827F8EBC300A81AE8 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9C70727F8EBC300A81AE8 /* GameOver.swift */; };
 		3CF9C70A27F8EBD500A81AE8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C70927F8EBD500A81AE8 /* GameOver.sks */; };
+		3CF9C71127F932B000A81AE8 /* swoosh2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C71027F932B000A81AE8 /* swoosh2.caf */; };
+		3CF9C71327F932B900A81AE8 /* launch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C71227F932B900A81AE8 /* launch.caf */; };
+		3CF9C71527F934FE00A81AE8 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9C71427F934FE00A81AE8 /* music.mp3 */; };
 		A8AEB96F27F88851005C74E2 /* leaderboard.json in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB96E27F88851005C74E2 /* leaderboard.json */; };
 		A8AEB97227F89F96005C74E2 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */; };
 		A8AEB97427F8A142005C74E2 /* Winner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AEB97327F8A142005C74E2 /* Winner.swift */; };
@@ -118,6 +121,9 @@
 		3CF9C70527F87DF000A81AE8 /* logo.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpeg; sourceTree = "<group>"; };
 		3CF9C70727F8EBC300A81AE8 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		3CF9C70927F8EBD500A81AE8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		3CF9C71027F932B000A81AE8 /* swoosh2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swoosh2.caf; sourceTree = "<group>"; };
+		3CF9C71227F932B900A81AE8 /* launch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = launch.caf; sourceTree = "<group>"; };
+		3CF9C71427F934FE00A81AE8 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		A8AEB96E27F88851005C74E2 /* leaderboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = leaderboard.json; sourceTree = "<group>"; };
 		A8AEB97127F89F96005C74E2 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		A8AEB97327F8A142005C74E2 /* Winner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Winner.swift; sourceTree = "<group>"; };
@@ -232,6 +238,9 @@
 				3CF9C70727F8EBC300A81AE8 /* GameOver.swift */,
 				3CF9C6F727F8666600A81AE8 /* gameContStructures.swift */,
 				3CF9C6E027F863A200A81AE8 /* GameViewController.swift */,
+				3CF9C71427F934FE00A81AE8 /* music.mp3 */,
+				3CF9C71027F932B000A81AE8 /* swoosh2.caf */,
+				3CF9C71227F932B900A81AE8 /* launch.caf */,
 				3CF9C6E227F863A200A81AE8 /* Main.storyboard */,
 				3CF9C6E527F863A300A81AE8 /* Assets.xcassets */,
 				3CF9C70527F87DF000A81AE8 /* logo.jpeg */,
@@ -394,6 +403,7 @@
 				A8AEB9E527F945CC005C74E2 /* 32.png in Resources */,
 				A8AEB9EA27F945CC005C74E2 /* 33.png in Resources */,
 				A8AEB9B727F93CD2005C74E2 /* 18.png in Resources */,
+				3CF9C71127F932B000A81AE8 /* swoosh2.caf in Resources */,
 				A8AEB98627F8B721005C74E2 /* abi@2x.jpeg in Resources */,
 				A8AEB9E427F945CC005C74E2 /* 54.png in Resources */,
 				A8AEB9ED27F945CC005C74E2 /* 43.png in Resources */,
@@ -409,6 +419,7 @@
 				A8AEB9B027F93CD2005C74E2 /* 19.png in Resources */,
 				A8AEB9C627F93CD3005C74E2 /* 1.png in Resources */,
 				A8AEB9FB27F945CC005C74E2 /* 55.png in Resources */,
+				3CF9C71527F934FE00A81AE8 /* music.mp3 in Resources */,
 				A8AEB98127F8B6FC005C74E2 /* pretzel123@2x.jpeg in Resources */,
 				A8AEB9B627F93CD2005C74E2 /* 21.png in Resources */,
 				A8AEB9AD27F93CD2005C74E2 /* 17.png in Resources */,
@@ -424,6 +435,7 @@
 				A8AEB9AB27F93CD2005C74E2 /* 24.png in Resources */,
 				3CF9C6DB27F863A200A81AE8 /* GameScene1.sks in Resources */,
 				A8AEB9B227F93CD2005C74E2 /* 14.png in Resources */,
+				3CF9C71327F932B900A81AE8 /* launch.caf in Resources */,
 				3CF9C6F027F8657D00A81AE8 /* MainMenu.sks in Resources */,
 				A8AEB9BF27F93CD2005C74E2 /* 2.png in Resources */,
 				A8AEB9F927F945CC005C74E2 /* 52.png in Resources */,
