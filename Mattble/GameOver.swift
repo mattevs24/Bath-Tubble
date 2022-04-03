@@ -26,6 +26,8 @@ class GameOver: SKScene {
         if nodesArray.first?.name == "return" {
             let transition = SKTransition.push(with: .left, duration: 0.5)
             let gameMenu = MainMenu(size: self.size)
+            run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
+            gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         }
     }

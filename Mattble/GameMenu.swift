@@ -27,11 +27,15 @@ class GameMenu: SKScene {
         let nodesArray = self.nodes(at: location)
         if nodesArray.first?.name == "multiplayer" {
             let transition = SKTransition.push(with: .left, duration: 0.5)
+            run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: true))
             let gameMenu = GameScene1(size: self.size)
+            gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         } else if nodesArray.first?.name == "singleplayer" {
             let transition = SKTransition.push(with: .left, duration: 0.5)
+            run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: true))
             let gameMenu = GameSceneAI(size: self.size)
+            gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         }
     }

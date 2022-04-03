@@ -10,6 +10,7 @@
 import SpriteKit
 import GameplayKit
 import SwiftUI
+import AVFoundation
 
 class GameScene1: SKScene {
     
@@ -27,17 +28,24 @@ class GameScene1: SKScene {
     
     var player1cards: [Int]!
     var player2cards: [Int]!
-    var correctIcon: Int?
+    var correctIcon: String!
     var player1Icons: [Int]?
     var player2Icons: [Int]?
     
     var player1: SKLabelNode!
     var player2: SKLabelNode!
     
+    var music: AVAudioPlayer!
+    
     var gameStarted: Bool = false //touch enabled for game
     
     var countdown: SKSpriteNode!
     var gameCont = MultiplayerGameSystem()
+    
+    override func update(_ currentTime: TimeInterval) {
+        player1.text = "\(player1cards?.count ?? 0)"
+        player2.text = "\(player2cards?.count ?? 0)"
+    }
 
     override func didMove(to view: SKView) {
         
@@ -70,17 +78,21 @@ class GameScene1: SKScene {
             
             correctIcon = uniqueMatch(A: player1Icons!, B: player2Icons!)
             
-            if nodesArray.first?.name == "correct" {   //should be "correct" = String(correctIcon)
+            if nodesArray.first?.name == correctIcon {
                 let node = nodesArray[0]
                 let receiver = node.parent
                 if receiver == cardFront1 {
                     moveCard(giver: 2)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else if receiver == cardFront1Other {
                     moveCard(giver: 2)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else if receiver == cardFront2 {
                     moveCard(giver: 1)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else {
                     moveCard(giver: 1)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 }
             }
         }
@@ -118,13 +130,13 @@ class GameScene1: SKScene {
         player1.position = CGPoint(x: frame.width/5-10, y: 250)
         player1.fontSize = 36
         player1.fontName = ""
-        player1.zPosition = 100
+        player1.zPosition = -100
         player1.fontColor = .black
         
         player2.position = CGPoint(x: frame.width*4/5+10, y: 667-250)
         player2.fontSize = 36
         player2.fontName = ""
-        player2.zPosition = 100
+        player2.zPosition = -100
         player2.fontColor = .black
         player2.zRotation = .pi
         
@@ -175,7 +187,7 @@ class GameScene1: SKScene {
         cardFront1?.name = "player1Card"
         cardFront1?.zPosition = -60
         
-        cardFront1?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        cardFront1?.position = CGPoint(x: frame.width/2, y: frame.height/4)
         
         addChild(cardFront1!)
     }
@@ -187,7 +199,7 @@ class GameScene1: SKScene {
         cardFront2?.name = "player2Card"
         cardFront2?.zPosition = -60
         
-        cardFront2?.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        cardFront2?.position = CGPoint(x: frame.width/2, y: frame.height*3/4)
         
         addChild(cardFront2!)
     }
@@ -199,7 +211,7 @@ class GameScene1: SKScene {
         cardFront1Other?.name = "player1Card"
         cardFront1Other?.zPosition = -60
         
-        cardFront1Other?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        cardFront1Other?.position = CGPoint(x: frame.width/2, y: frame.height/4)
         
         addChild(cardFront1Other!)
     }
@@ -211,7 +223,7 @@ class GameScene1: SKScene {
         cardFront2Other?.name = "player2Card"
         cardFront2Other?.zPosition = -60
         
-        cardFront2Other?.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        cardFront2Other?.position = CGPoint(x: frame.width/2, y: frame.height*3/4)
         
         addChild(cardFront2Other!)
     }
@@ -220,12 +232,14 @@ class GameScene1: SKScene {
     
     func player1Icons(index:Int, other: Bool) {
         if other {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard1]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
             icon.position = CGPoint.zero
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront1Other?.addChild(icon)
@@ -233,23 +247,25 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y:addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront1Other?.addChild(icon)
             }
         } else {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard1]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             icon.position = CGPoint.zero
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront1?.addChild(icon)
@@ -257,12 +273,12 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
                 icon.position = CGPoint(x:addx, y:addy)
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront1?.addChild(icon)
@@ -272,8 +288,10 @@ class GameScene1: SKScene {
     
     func player2Icons(index:Int, other: Bool) {
         if other {
-            var icon = SKSpriteNode(imageNamed: "logo")
-            icon.name = "correct"
+            var shuffled = gameCont.cards[currentCard2]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
+            icon.name = "\(shuffled![0])"
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
@@ -285,23 +303,25 @@ class GameScene1: SKScene {
             for i in 0...6 {
                 let addx = 80*sin((2.0/7.0)*Double.pi*Double(i))
                 let addy = 80*cos((2.0/7.0)*Double.pi*Double(i))
-                icon = SKSpriteNode(imageNamed: "logo")
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon.name = "incorrect"
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
                 cardFront2Other?.addChild(icon)
             }
         } else {
-            var icon = SKSpriteNode(imageNamed: "logo")
+            var shuffled = gameCont.cards[currentCard2]
+            shuffled!.shuffle()
+            var icon = SKSpriteNode(imageNamed: "\(shuffled![0])")
             icon.position = CGPoint.zero
             var rotation = CGFloat(Double.random(in: 0...2*Double.pi))
             var scalar = CGFloat(Double.random(in: 0.8...1.5))
             icon.zRotation = rotation
-            icon.name = "correct"
+            icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
             icon.zPosition = 5
             cardFront2?.addChild(icon)
@@ -312,8 +332,8 @@ class GameScene1: SKScene {
                 rotation = CGFloat(Double.random(in: 0...2*Double.pi))
                 scalar = CGFloat(Double.random(in: 0.8...1.5))
                 icon.zRotation = rotation
-                icon = SKSpriteNode(imageNamed: "logo")
-                icon.name = "incorrect"
+                icon = SKSpriteNode(imageNamed: "\(shuffled![i+1])")
+                icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
                 icon.zPosition = 5
@@ -350,16 +370,17 @@ class GameScene1: SKScene {
                 player2cards.insert(currentCard1, at: random)                       //insert currentcard1
                 let index = player1cards.firstIndex(of: currentCard1)               //index of currentcard1
                 player1cards.remove(at: index!)                                     //remove currentcard1
-                if player1cards.count==1 {                                          //if one element left
+                if player1cards.count==2 {                                          //if one element left
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5) //create transition
                     let gameMenu = GameOver(size: self.size)                        //create scene
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)       //transition to scene
                 }
                 currentCard1 = player1cards[0]                                      //new currentcard1
                 
                 createPlayer1Card()                                                 //create cardFront1
                 player1Icons(index: 0, other: false)                                //add icons down
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)                                                   //create move action
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)                                                   //create move action
                 cardFront1Other?.run(action)                                        //run action
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront1Other?.removeFromParent()                       //dispatchqueue to
@@ -382,16 +403,17 @@ class GameScene1: SKScene {
                 player2cards.insert(currentCard1, at: random)
                 let index = player1cards.firstIndex(of: currentCard1)
                 player1cards.remove(at: index!)
-                if player1cards.count==1 {
+                if player1cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard1 = player1cards[0]
                 
                 createPlayer1Other()
                 player1Icons(index: 0, other: true)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
                 cardFront1?.run(action)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront1?.removeFromParent()
@@ -417,16 +439,17 @@ class GameScene1: SKScene {
                 player1cards.insert(currentCard2, at: random)
                 let index = player2cards.firstIndex(of: currentCard2)
                 player2cards.remove(at: index!)
-                if player2cards.count==1 {
+                if player2cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard2 = player2cards[0]
                 
                 createPlayer2Card()
                 player2Icons(index: 0, other: false)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
                 cardFront2Other?.run(action)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront2Other?.removeFromParent()
@@ -440,45 +463,46 @@ class GameScene1: SKScene {
                 }
             } else {
                 if cardFront1 == nil {
-                    cardFront1Other?.zPosition += 60
+                    cardFront1Other?.zPosition += 600
                 } else {
-                    cardFront1?.zPosition += 60
+                    cardFront1?.zPosition += 600
                 }
                 //the move card to the other array
                 let random = Int.random(in:1...player1cards.count-1)
                 player1cards.insert(currentCard2, at: random)
                 let index = player2cards.firstIndex(of: currentCard2)
                 player2cards.remove(at: index!)
-                if player2cards.count==1 {
+                if player2cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard2 = player2cards[0]
                 
                 createPlayer2Other()
                 player2Icons(index: 0, other: true)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 10)
                 cardFront2?.run(action)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
                     self?.cardFront2?.removeFromParent()
                     self?.cardFront2 = nil
                 }
                 cardFront2Other?.zPosition += 60
                 if cardFront1 == nil {
-                    cardFront1Other?.zPosition -= 60
+                    cardFront1Other?.zPosition -= 600
                 } else {
-                    cardFront1?.zPosition -= 60
+                    cardFront1?.zPosition -= 600
                 }
             }
         }
     }
     
-    func uniqueMatch(A:[Int],B:[Int]) -> Int {
+    func uniqueMatch(A:[Int],B:[Int]) -> String {
         if Array(Set(A).intersection(Set(B))).count == 1{
-            return Array(Set(A).intersection(Set(B)))[0]
+            return String(Array(Set(A).intersection(Set(B)))[0])
         } else {
-            return 0
+            return "0"
         }
     }
 }
