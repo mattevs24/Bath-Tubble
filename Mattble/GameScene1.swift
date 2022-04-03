@@ -10,6 +10,7 @@
 import SpriteKit
 import GameplayKit
 import SwiftUI
+import AVFoundation
 
 class GameScene1: SKScene {
     
@@ -34,10 +35,17 @@ class GameScene1: SKScene {
     var player1: SKLabelNode!
     var player2: SKLabelNode!
     
+    var music: AVAudioPlayer!
+    
     var gameStarted: Bool = false //touch enabled for game
     
     var countdown: SKSpriteNode!
     var gameCont = MultiplayerGameSystem()
+    
+    override func update(_ currentTime: TimeInterval) {
+        player1.text = "\(player1cards?.count ?? 0)"
+        player2.text = "\(player2cards?.count ?? 0)"
+    }
 
     override func didMove(to view: SKView) {
         
@@ -52,6 +60,22 @@ class GameScene1: SKScene {
         
         currentCard1 = player1cards[0]
         currentCard2 = player2cards[0]
+        
+        let urlString = Bundle.main.path(forResource: "music", ofType: "mp3")
+        do {
+            try AVAudioSession.sharedInstance().setMode(.default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            guard let urlString = urlString else {return}
+            
+            music = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
+            guard let music = music else { return }
+            
+            music.play()
+            
+        } catch {
+            print("etwas is schiefgelaufen")
+        }
         
         countdownToPlay()
     }
@@ -75,12 +99,16 @@ class GameScene1: SKScene {
                 let receiver = node.parent
                 if receiver == cardFront1 {
                     moveCard(giver: 2)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else if receiver == cardFront1Other {
                     moveCard(giver: 2)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else if receiver == cardFront2 {
                     moveCard(giver: 1)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 } else {
                     moveCard(giver: 1)
+                    run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
                 }
             }
         }
@@ -118,13 +146,13 @@ class GameScene1: SKScene {
         player1.position = CGPoint(x: frame.width/5-10, y: 250)
         player1.fontSize = 36
         player1.fontName = ""
-        player1.zPosition = 100
+        player1.zPosition = -100
         player1.fontColor = .black
         
         player2.position = CGPoint(x: frame.width*4/5+10, y: 667-250)
         player2.fontSize = 36
         player2.fontName = ""
-        player2.zPosition = 100
+        player2.zPosition = -100
         player2.fontColor = .black
         player2.zRotation = .pi
         
@@ -175,7 +203,7 @@ class GameScene1: SKScene {
         cardFront1?.name = "player1Card"
         cardFront1?.zPosition = -60
         
-        cardFront1?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        cardFront1?.position = CGPoint(x: frame.width/2, y: frame.height/4)
         
         addChild(cardFront1!)
     }
@@ -187,7 +215,7 @@ class GameScene1: SKScene {
         cardFront2?.name = "player2Card"
         cardFront2?.zPosition = -60
         
-        cardFront2?.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        cardFront2?.position = CGPoint(x: frame.width/2, y: frame.height*3/4)
         
         addChild(cardFront2!)
     }
@@ -199,7 +227,7 @@ class GameScene1: SKScene {
         cardFront1Other?.name = "player1Card"
         cardFront1Other?.zPosition = -60
         
-        cardFront1Other?.position = CGPoint(x: frame.width/2, y: frame.height/4*3)
+        cardFront1Other?.position = CGPoint(x: frame.width/2, y: frame.height/4)
         
         addChild(cardFront1Other!)
     }
@@ -211,7 +239,7 @@ class GameScene1: SKScene {
         cardFront2Other?.name = "player2Card"
         cardFront2Other?.zPosition = -60
         
-        cardFront2Other?.position = CGPoint(x: frame.width/2, y: frame.height/4)
+        cardFront2Other?.position = CGPoint(x: frame.width/2, y: frame.height*3/4)
         
         addChild(cardFront2Other!)
     }
@@ -350,16 +378,17 @@ class GameScene1: SKScene {
                 player2cards.insert(currentCard1, at: random)                       //insert currentcard1
                 let index = player1cards.firstIndex(of: currentCard1)               //index of currentcard1
                 player1cards.remove(at: index!)                                     //remove currentcard1
-                if player1cards.count==1 {                                          //if one element left
+                if player1cards.count==2 {                                          //if one element left
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5) //create transition
                     let gameMenu = GameOver(size: self.size)                        //create scene
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)       //transition to scene
                 }
                 currentCard1 = player1cards[0]                                      //new currentcard1
                 
                 createPlayer1Card()                                                 //create cardFront1
                 player1Icons(index: 0, other: false)                                //add icons down
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)                                                   //create move action
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)                                                   //create move action
                 cardFront1Other?.run(action)                                        //run action
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront1Other?.removeFromParent()                       //dispatchqueue to
@@ -382,16 +411,17 @@ class GameScene1: SKScene {
                 player2cards.insert(currentCard1, at: random)
                 let index = player1cards.firstIndex(of: currentCard1)
                 player1cards.remove(at: index!)
-                if player1cards.count==1 {
+                if player1cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard1 = player1cards[0]
                 
                 createPlayer1Other()
                 player1Icons(index: 0, other: true)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
                 cardFront1?.run(action)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront1?.removeFromParent()
@@ -417,16 +447,17 @@ class GameScene1: SKScene {
                 player1cards.insert(currentCard2, at: random)
                 let index = player2cards.firstIndex(of: currentCard2)
                 player2cards.remove(at: index!)
-                if player2cards.count==1 {
+                if player2cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard2 = player2cards[0]
                 
                 createPlayer2Card()
                 player2Icons(index: 0, other: false)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 0.5)
                 cardFront2Other?.run(action)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     self?.cardFront2Other?.removeFromParent()
@@ -440,35 +471,36 @@ class GameScene1: SKScene {
                 }
             } else {
                 if cardFront1 == nil {
-                    cardFront1Other?.zPosition += 60
+                    cardFront1Other?.zPosition += 600
                 } else {
-                    cardFront1?.zPosition += 60
+                    cardFront1?.zPosition += 600
                 }
                 //the move card to the other array
                 let random = Int.random(in:1...player1cards.count-1)
                 player1cards.insert(currentCard2, at: random)
                 let index = player2cards.firstIndex(of: currentCard2)
                 player2cards.remove(at: index!)
-                if player2cards.count==1 {
+                if player2cards.count==2 {
                     let transition = SKTransition.flipHorizontal(withDuration: 0.5)
                     let gameMenu = GameOver(size: self.size)
+                    gameMenu.scaleMode = .aspectFit
                     self.view?.presentScene(gameMenu, transition: transition)
                 }
                 currentCard2 = player2cards[0]
                 
                 createPlayer2Other()
                 player2Icons(index: 0, other: true)
-                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height*3/4), duration: 0.5)
+                let action = SKAction.move(to: CGPoint(x: self.frame.width/2, y: self.frame.height/4), duration: 10)
                 cardFront2?.run(action)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
                     self?.cardFront2?.removeFromParent()
                     self?.cardFront2 = nil
                 }
                 cardFront2Other?.zPosition += 60
                 if cardFront1 == nil {
-                    cardFront1Other?.zPosition -= 60
+                    cardFront1Other?.zPosition -= 600
                 } else {
-                    cardFront1?.zPosition -= 60
+                    cardFront1?.zPosition -= 600
                 }
             }
         }

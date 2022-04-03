@@ -10,7 +10,6 @@ import GameplayKit
 import SwiftUI
 import UIKit
 
-
 //need to add textures thorughout! just left blacnk for now
 
 
@@ -20,7 +19,7 @@ class MainMenu: SKScene {
     var logoSprite: SKSpriteNode!
     var newGameButton: SKSpriteNode!
     var settingsMenuButton: SKSpriteNode!
-    
+                
     override func didMove(to view: SKView) {
         createBackground()
         createLogo()
@@ -33,11 +32,15 @@ class MainMenu: SKScene {
         let nodesArray = self.nodes(at: location)
         if nodesArray.first?.name == "newGameButton" {
             let transition = SKTransition.push(with: .left, duration: 0.5)
+            run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
             let gameMenu = GameMenu(size: self.size)
+            gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         } else if nodesArray.first?.name == "settingsMenuButton" {
             let transition = SKTransition.push(with: .left, duration: 0.5)
             let gameMenu = SettingsMenu(size: self.size)
+            run(SKAction.playSoundFileNamed("swoosh2.caf", waitForCompletion: false))
+            gameMenu.scaleMode = .aspectFit
             self.view?.presentScene(gameMenu, transition: transition)
         }
         
