@@ -99,8 +99,8 @@ class GameScene1: SKScene {
     }
     
     func createCardBacks() {
-        cardBack1 = SKShapeNode(circleOfRadius: 120)
-        cardBack2 = SKShapeNode(circleOfRadius: 120)
+        cardBack1 = SKShapeNode(circleOfRadius: frame.width*8/19)
+        cardBack2 = SKShapeNode(circleOfRadius: frame.width*8/19)
         
         let texture = SKTexture(imageNamed: "logo")
         
@@ -181,7 +181,7 @@ class GameScene1: SKScene {
     //MARK: - playerCards creation
     
     func createPlayer1Card() {
-        cardFront1 = SKShapeNode(circleOfRadius: 120)
+        cardFront1 = SKShapeNode(circleOfRadius: frame.width*8/19)
         cardFront1?.fillColor = .white
         cardFront1?.fillTexture = SKTexture(imageNamed: "cardTexture")
         cardFront1?.name = "player1Card"
@@ -193,7 +193,7 @@ class GameScene1: SKScene {
     }
     
     func createPlayer2Card() {
-        cardFront2 = SKShapeNode(circleOfRadius: 120)
+        cardFront2 = SKShapeNode(circleOfRadius: frame.width*8/19)
         cardFront2?.fillColor = .white
         cardFront2?.fillTexture = SKTexture(imageNamed: "cardTexture")
         cardFront2?.name = "player2Card"
@@ -205,7 +205,7 @@ class GameScene1: SKScene {
     }
     
     func createPlayer1Other() {
-        cardFront1Other = SKShapeNode(circleOfRadius: 120)
+        cardFront1Other = SKShapeNode(circleOfRadius: frame.width*8/19)
         cardFront1Other?.fillColor = .white
         cardFront1Other?.fillTexture = SKTexture(imageNamed: "cardTexture")
         cardFront1Other?.name = "player1Card"
@@ -217,7 +217,7 @@ class GameScene1: SKScene {
     }
     
     func createPlayer2Other() {
-        cardFront2Other = SKShapeNode(circleOfRadius: 120)
+        cardFront2Other = SKShapeNode(circleOfRadius: frame.width*8/19)
         cardFront2Other?.fillColor = .white
         cardFront2Other?.fillTexture = SKTexture(imageNamed: "cardTexture")
         cardFront2Other?.name = "player2Card"
@@ -241,7 +241,7 @@ class GameScene1: SKScene {
             icon.position = CGPoint.zero
             icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-            icon.zPosition = 5
+            //icon.zPosition = 1
             cardFront1Other?.addChild(icon)
             
             for i in 0...6 {
@@ -254,7 +254,7 @@ class GameScene1: SKScene {
                 icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y:addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-                icon.zPosition = 5
+                //icon.zPosition = 1
                 cardFront1Other?.addChild(icon)
             }
         } else {
@@ -267,7 +267,7 @@ class GameScene1: SKScene {
             icon.zRotation = rotation
             icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-            icon.zPosition = 5
+            //icon.zPosition = 1
             cardFront1?.addChild(icon)
             
             for i in 0...6 {
@@ -280,7 +280,7 @@ class GameScene1: SKScene {
                 icon.position = CGPoint(x:addx, y:addy)
                 icon.name = "\(shuffled![i+1])"
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-                icon.zPosition = 5
+                //icon.zPosition = 1
                 cardFront1?.addChild(icon)
             }
         }
@@ -297,7 +297,7 @@ class GameScene1: SKScene {
             icon.zRotation = rotation
             icon.position = CGPoint.zero
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-            icon.zPosition = 5
+            //icon.zPosition = 1
             cardFront2Other?.addChild(icon)
             
             for i in 0...6 {
@@ -310,7 +310,7 @@ class GameScene1: SKScene {
                 icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-                icon.zPosition = 5
+                //icon.zPosition = 1
                 cardFront2Other?.addChild(icon)
             }
         } else {
@@ -323,7 +323,7 @@ class GameScene1: SKScene {
             icon.zRotation = rotation
             icon.name = "\(shuffled![0])"
             icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-            icon.zPosition = 5
+            //icon.zPosition = 1
             cardFront2?.addChild(icon)
             
             for i in 0...6 {
@@ -336,7 +336,7 @@ class GameScene1: SKScene {
                 icon.name = "\(shuffled![i+1])"
                 icon.position = CGPoint(x:addx, y: addy)
                 icon.size = CGSize(width: 40*scalar, height: 40*scalar)
-                icon.zPosition = 5
+                //icon.zPosition = 1
                 cardFront2?.addChild(icon)
             }
         }
@@ -464,8 +464,10 @@ class GameScene1: SKScene {
             } else {
                 if cardFront1 == nil {
                     cardFront1Other?.zPosition += 600
+                    editChildrenHeight(sprite: cardFront1Other!, zPos: 600)
                 } else {
                     cardFront1?.zPosition += 600
+                    editChildrenHeight(sprite: cardFront1!, zPos: 600)
                 }
                 //the move card to the other array
                 let random = Int.random(in:1...player1cards.count-1)
@@ -489,10 +491,13 @@ class GameScene1: SKScene {
                     self?.cardFront2 = nil
                 }
                 cardFront2Other?.zPosition += 60
+                editChildrenHeight(sprite: cardFront2Other!, zPos: 60)
                 if cardFront1 == nil {
                     cardFront1Other?.zPosition -= 600
+                    editChildrenHeight(sprite: cardFront1Other!, zPos: -600)
                 } else {
                     cardFront1?.zPosition -= 600
+                    editChildrenHeight(sprite: cardFront1!, zPos: -600)
                 }
             }
         }
@@ -503,6 +508,13 @@ class GameScene1: SKScene {
             return String(Array(Set(A).intersection(Set(B)))[0])
         } else {
             return "0"
+        }
+    }
+    
+    func editChildrenHeight(sprite:SKShapeNode, zPos: CGFloat) {
+        let children = sprite.children
+        for child in children {
+            child.zPosition += zPos
         }
     }
 }
