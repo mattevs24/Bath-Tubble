@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct LeaderboardList: View {
+    var result = winners.sorted {
+        $0.score > $1.score
+    }
     var body: some View {
-        List(winners, id: \.score) {winner in
-            LeaderboardRow(winner: winner, place: 1)
+        NavigationView {
+            List(result.indices, id: \.self) {index in
+                LeaderboardRow(winner: result[index], place: index+1)
+            }
+                .navigationTitle("Leaderboard")
         }
     }
 }
