@@ -59,7 +59,6 @@
 		A8AEB9BA27F93CD2005C74E2 /* 23.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB99C27F93CCA005C74E2 /* 23.png */; };
 		A8AEB9BB27F93CD2005C74E2 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB99D27F93CCB005C74E2 /* 9.png */; };
 		A8AEB9BC27F93CD2005C74E2 /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB99E27F93CCC005C74E2 /* 16.png */; };
-		A8AEB9BD27F93CD2005C74E2 /* 25.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB99F27F93CCC005C74E2 /* 25.png */; };
 		A8AEB9BE27F93CD2005C74E2 /* 15.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB9A027F93CCD005C74E2 /* 15.png */; };
 		A8AEB9BF27F93CD2005C74E2 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB9A127F93CCE005C74E2 /* 2.png */; };
 		A8AEB9C027F93CD2005C74E2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AEB9A227F93CCE005C74E2 /* 4.png */; };
@@ -153,7 +152,6 @@
 		A8AEB99C27F93CCA005C74E2 /* 23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 23.png; sourceTree = "<group>"; };
 		A8AEB99D27F93CCB005C74E2 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		A8AEB99E27F93CCC005C74E2 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
-		A8AEB99F27F93CCC005C74E2 /* 25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 25.png; sourceTree = "<group>"; };
 		A8AEB9A027F93CCD005C74E2 /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15.png; sourceTree = "<group>"; };
 		A8AEB9A127F93CCE005C74E2 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		A8AEB9A227F93CCE005C74E2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				A8AEB99627F93CC7005C74E2 /* 22.png */,
 				A8AEB99C27F93CCA005C74E2 /* 23.png */,
 				A8AEB98D27F93CC2005C74E2 /* 24.png */,
-				A8AEB99F27F93CCC005C74E2 /* 25.png */,
 				A8AEB9A927F93CD2005C74E2 /* 26.png */,
 				A8AEB99727F93CC8005C74E2 /* 27.png */,
 				A8AEB99A27F93CCA005C74E2 /* 28.png */,
@@ -413,7 +410,6 @@
 				A8AEB9EC27F945CC005C74E2 /* 34.png in Resources */,
 				A8AEB9C527F93CD3005C74E2 /* 13.png in Resources */,
 				A8AEB9E927F945CC005C74E2 /* 37.png in Resources */,
-				A8AEB9BD27F93CD2005C74E2 /* 25.png in Resources */,
 				3CF9C6E427F863A200A81AE8 /* Main.storyboard in Resources */,
 				A8AEB9FA27F945CC005C74E2 /* 46.png in Resources */,
 				A8AEB9B027F93CD2005C74E2 /* 19.png in Resources */,
