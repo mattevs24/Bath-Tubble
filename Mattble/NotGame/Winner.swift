@@ -16,8 +16,8 @@ struct Winner: Hashable, Codable {
     var score: Int
     var time: Int
     var cards: Int
-    
     var image: Image {
         Image(name)
     }
 }
+
